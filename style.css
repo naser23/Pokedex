@@ -39,6 +39,18 @@ body {
   background: white;
   width: 80%;
   height: 80%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.choose-pokemon {
+  border: 1px solid black;
+  width: 40%;
+  height: 20%;
+  margin: 2rem 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* - right side - */
@@ -66,19 +78,51 @@ body {
 .pokemon-name {
   width: 40%;
   height: 40%;
-  background: darkorange;
+  background: lightblue;
+  border-radius: 25px;
 }
 
 .pokemon-picture {
   width: 55%;
   height: 40%;
   margin-left: 5%;
-  background: green;
+  background: gray;
+  border-radius: 25px;
 }
 
 .pokemon-stats {
   width: 100%;
   height: 55%;
-  background: purple;
+  background: lightblue;
   margin-top: 5%;
+  border-radius: 25px;
+}
+
+/* // --- mobile layout --- // */
+@media screen and (max-width: 550px) and (max-height: 900px) {
+  #container {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pokemon-selection {
+    order: 1;
+    width: 100%;
+    border: none;
+    border-top: 2px solid black;
+    border-top-left-radius: 0px;
+  }
+
+  .pokemon-info {
+    height: 90%;
+    width: 100%;
+    border: none;
+    border-radius: none;
+  }
+
+  .pokemon-info-container {
+    height: 90%;
+  }
 }
