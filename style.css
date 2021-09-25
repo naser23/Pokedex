@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* // --- DESKTOP STYLING FIRST (SINCE I DONT HAVE A MOBILE MOCKUP TO GO OFF OF) --- // */
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: lightgray;
+}
+
+#container {
+  width: 80%;
+  height: 80%;
+  background: lightblue;
+  border-radius: 25px;
+  display: flex;
+  background: #b22222;
+}
+
+/* - left side - */
+.pokemon-selection {
+  width: 50%;
+  height: 100%;
+  border: 1px solid red;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.all-pokemon {
+  background: white;
+  width: 80%;
+  height: 80%;
+}
+
+/* - right side - */
+.pokemon-info {
+  width: 50%;
+  height: 100%;
+  border: 1px solid green;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokemon-info-container {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* background: white; */
+}
+
+.pokemon-name {
+  width: 40%;
+  height: 40%;
+  background: darkorange;
+}
+
+.pokemon-picture {
+  width: 55%;
+  height: 40%;
+  margin-left: 5%;
+  background: green;
+}
+
+.pokemon-stats {
+  width: 100%;
+  height: 55%;
+  background: purple;
+  margin-top: 5%;
+}
