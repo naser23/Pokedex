@@ -39,6 +39,7 @@ body {
   background: white;
   width: 80%;
   height: 80%;
+  max-height: 80%;
   display: flex;
   flex-wrap: wrap;
   overflow: scroll;
@@ -118,6 +119,7 @@ body {
 
   .all-pokemon {
     overflow: scroll;
+    max-height: 300px;
   }
 
   .pokemon-info {

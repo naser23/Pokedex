@@ -4,34 +4,40 @@
 const allPokemon = document.querySelector(".all-pokemon");
 
 // --- fetching data from the api --- //
-const apiURL = "https://pokeapi.co/api/v2/";
 
-const testPokemon = {
-  url: "https://pokeapi.co/api/v2/",
-  type: "pokemon",
-  id: "1",
-};
-
-const { url, type, id } = testPokemon;
-const testURL = `${url}${type}/${id}`;
-console.log(testURL);
-
-fetch(testURL)
-  .then((data) => data.json())
-  .then((pokemon) => pokemonListItem(pokemon));
-
-for (const key in data) {
-  console.log(`${key}`);
+// first fetch request is to get the data for the 151 pokemon //
+function fetchPokemonData() {
+  fetch("https://pokeapi.co/api/v2/pokemon?limit=151") // gives us array of all pokemon with name and url //
+    .then((response) => response.json()) // takes data and converts it to json text //
+    .then(function (allPokemon) {
+      // loops through original data and gives us data for each point in array(pokemon) //
+      allPokemon.results.forEach(function (pokemon) {
+        fetchPokeData(pokemon);
+      });
+    });
 }
 
-function pokemonListItem(data) {
+// second fetch request is to get the specific data for each pokemon //
+function fetchPokeData(pokemon) {
+  let url = pokemon.url;
+
+  fetch(url)
+    .then((response) => response.json())
+    .then(function (pokeData) {
+      pokemonListItem(pokeData);
+    });
+}
+fetchPokemonData();
+
+function pokemonListItem(pokeData) {
   let specificPokemon = document.createElement("div");
   specificPokemon.classList.add("choose-pokemon");
-  specificPokemon.style.backgroundImage = `url(${data.sprites.front_default})`;
+  specificPokemon.style.backgroundImage = `url(${pokeData.sprites.front_default})`;
   specificPokemon.style.backgroundPosition = "center";
   specificPokemon.style.backgroundRepeat = "no-repeat";
   specificPokemon.style.backgroundSize = "cover";
   allPokemon.appendChild(specificPokemon);
-  console.log(specificPokemon, data);
+  console.log(pokeData);
+
   return specificPokemon;
 }
