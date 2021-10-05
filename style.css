@@ -85,10 +85,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.name {
-  /* width: 2rem; */
+  border: 2px solid black;
 }
 
 .pokemon-picture {
@@ -97,6 +94,7 @@ body {
   margin-left: 5%;
   background: gray;
   border-radius: 25px;
+  border: 2px solid black;
 }
 
 .pokemon-stats {
@@ -108,6 +106,7 @@ body {
   display: flex;
   /* flex-direction: column; */
   /* flex-wrap: wrap; */
+  border: 2px solid black;
 }
 
 /* // all things inside of the characteristcs element // */
@@ -214,11 +213,11 @@ body {
 }
 
 @media screen and (max-width: 750px) {
-  /* .characteristics {
-    height: 50%;
-  } */
+  .characteristics {
+    overflow: scroll;
+  }
 
-  /* .stat {
-    font-size: 0.75rem;
-  } */
+  .actual-stats {
+    overflow: scroll;
+  }
 }
