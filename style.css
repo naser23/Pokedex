@@ -117,7 +117,7 @@ body {
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  background-color: purple;
+  border-right: 2px solid black;
 }
 
 .characteristics-ul {
@@ -135,21 +135,20 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: green;
 }
 
 .actual-stats-ul {
   padding-top: 15px;
 }
 
-.move-list {
+/* .move-list {
   width: 50%;
   height: 100%;
   background-color: orange;
   overflow: scroll;
   display: flex;
   flex-direction: column;
-}
+} */
 
 .move-list-header {
   text-align: center;
@@ -199,7 +198,6 @@ body {
   .characteristics {
     width: 100%;
     height: 100% auto;
-    background-color: purple;
   }
   .characteristics-ul {
     font-size: 0.75rem;
@@ -208,7 +206,6 @@ body {
   .actual-stats {
     width: 100%;
     height: 100% auto;
-    background-color: green;
   }
 }
 

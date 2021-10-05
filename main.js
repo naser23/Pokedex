@@ -46,12 +46,20 @@ function pokemonListItem(pokeData) {
   specificPokemon.style.backgroundPosition = "center";
   specificPokemon.style.backgroundRepeat = "no-repeat";
   specificPokemon.style.backgroundSize = "cover";
-  specificPokemon.onclick = () => displayPokemonPicture(pokeData);
+  specificPokemon.onclick = () => displayAllInfo(pokeData);
 
   allPokemon.appendChild(specificPokemon);
   return specificPokemon;
 }
 
+function displayAllInfo(pokeData) {
+  displayPokemonName(pokeData);
+  displayPokemonPicture(pokeData);
+  characteristicsLi(pokeData);
+  statsLi(pokeData);
+}
+
+// displays pokemon name //
 function displayPokemonName(pokeData) {
   pokeName.textContent = `${pokeData.name}`;
   console.log(pokeData.stats);
@@ -65,18 +73,7 @@ function displayPokemonPicture(pokeData) {
   console.log(pokeData);
 }
 
-// ELEMENTS INSIDE CHARACTERISTICS //
-function displayPokemonCharacteristics(pokeData) {
-  let ul = document.createElement("ul");
-  ul.classList.add("characteristics-ul");
-
-  let height = document.createElement("li");
-  height.classList.add("stat");
-  height.textContent = "height: 7";
-
-  ul.appendChild(height);
-}
-
+// changes text content of each characteristic //
 function characteristicsLi(pokeData) {
   let height = document.getElementById("height");
   let weight = document.getElementById("weight");
@@ -89,32 +86,18 @@ function characteristicsLi(pokeData) {
   baseXp.textContent = `Base-Experience: ${pokeData.base_experience}`;
 }
 
-function hpStat(pokeData) {
+// changes text content of each stat //
+function statsLi(pokeData) {
   let hp = document.getElementById("hp");
-  hp.textContent = `${pokeData.stats[0].stat.name}: ${pokeData.stats[0].base_stat}`;
-}
-
-function attackStat(pokeData) {
   let attack = document.getElementById("attack");
-  attack.textContent = `${pokeData.stats[1].stat.name}: ${pokeData.stats[1].base_stat}`;
-}
-
-function defenseStat(pokeData) {
   let defense = document.getElementById("defense");
-  defense.textContent = `${pokeData.stats[2].stat.name}: ${pokeData.stats[2].base_stat}`;
-}
-
-function specialAttackStat(pokeData) {
   let specialAttack = document.getElementById("special-attack");
-  specialAttack.textContent = `${pokeData.stats[3].stat.name}: ${pokeData.stats[3].base_stat}`;
-}
-
-function specialDefenseStat(pokeData) {
   let specialDefense = document.getElementById("special-defense");
-  specialDefense.textContent = `${pokeData.stats[4].stat.name}: ${pokeData.stats[4].base_stat}`;
-}
-
-function speedStat(pokeData) {
   let speed = document.getElementById("speed");
+  hp.textContent = `${pokeData.stats[0].stat.name}: ${pokeData.stats[0].base_stat}`;
+  attack.textContent = `${pokeData.stats[1].stat.name}: ${pokeData.stats[1].base_stat}`;
+  defense.textContent = `${pokeData.stats[2].stat.name}: ${pokeData.stats[2].base_stat}`;
+  specialAttack.textContent = `${pokeData.stats[3].stat.name}: ${pokeData.stats[3].base_stat}`;
+  specialDefense.textContent = `${pokeData.stats[4].stat.name}: ${pokeData.stats[4].base_stat}`;
   speed.textContent = `${pokeData.stats[5].stat.name}: ${pokeData.stats[5].base_stat}`;
 }
