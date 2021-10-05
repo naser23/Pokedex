@@ -46,6 +46,7 @@ function pokemonListItem(pokeData) {
   specificPokemon.style.backgroundPosition = "center";
   specificPokemon.style.backgroundRepeat = "no-repeat";
   specificPokemon.style.backgroundSize = "cover";
+  specificPokemon.setAttribute("loading", "lazy");
   specificPokemon.onclick = () => displayAllInfo(pokeData);
 
   allPokemon.appendChild(specificPokemon);
