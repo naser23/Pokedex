@@ -94,6 +94,7 @@ function statsLi(pokeData) {
   let specialAttack = document.getElementById("special-attack");
   let specialDefense = document.getElementById("special-defense");
   let speed = document.getElementById("speed");
+
   hp.textContent = `${pokeData.stats[0].stat.name}: ${pokeData.stats[0].base_stat}`;
   attack.textContent = `${pokeData.stats[1].stat.name}: ${pokeData.stats[1].base_stat}`;
   defense.textContent = `${pokeData.stats[2].stat.name}: ${pokeData.stats[2].base_stat}`;
