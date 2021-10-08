@@ -7,6 +7,8 @@ const pokeName = document.querySelector(".name");
 const pokemonPicture = document.querySelector(".pokemon-picture");
 const characteristics = document.querySelector(".characteristics");
 const actualStats = document.querySelector(".actual-stats");
+let pokemanPicture =
+  "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png";
 
 // --- fetching data from the api --- //
 
@@ -38,17 +40,23 @@ function createHtml(pokedata) {
   pokemonListItem(pokedata);
 }
 
+function backgroundImage(pokeData) {
+  let paddedNumber = pokeData.id.toString().padStart(3, 0);
+  let background = `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${paddedNumber}.png`;
+  return background;
+}
+
 // CREATING POKEMON ITEMS ON LEFT SIDE TO CLICK ON //
 function pokemonListItem(pokeData) {
   let specificPokemon = document.createElement("div");
   specificPokemon.classList.add("choose-pokemon");
-  specificPokemon.style.backgroundImage = `url(${pokeData.sprites.front_default})`;
+
+  specificPokemon.style.backgroundImage = `url(${backgroundImage(pokeData)})`;
   specificPokemon.style.backgroundPosition = "center";
   specificPokemon.style.backgroundRepeat = "no-repeat";
   specificPokemon.style.backgroundSize = "cover";
   specificPokemon.setAttribute("loading", "lazy");
   specificPokemon.onclick = () => displayAllInfo(pokeData);
-
   allPokemon.appendChild(specificPokemon);
   return specificPokemon;
 }
@@ -63,15 +71,13 @@ function displayAllInfo(pokeData) {
 // displays pokemon name //
 function displayPokemonName(pokeData) {
   pokeName.textContent = `${pokeData.name}`;
-  console.log(pokeData.stats);
 }
 
 function displayPokemonPicture(pokeData) {
-  pokemonPicture.style.backgroundImage = `url(${pokeData.sprites.front_default})`;
+  pokemonPicture.style.backgroundImage = `url(${backgroundImage(pokeData)})`;
   pokemonPicture.style.backgroundPosition = "center";
   pokemonPicture.style.backgroundRepeat = "no-repeat";
   pokemonPicture.style.backgroundSize = "cover";
-  console.log(pokeData);
 }
 
 // changes text content of each characteristic //
