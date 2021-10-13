@@ -13,31 +13,63 @@ let pokemanPicture =
 // --- fetching data from the api --- //
 
 // first fetch request is to get the data for the 151 pokemon //
-function fetchPokemonData() {
-  fetch("https://pokeapi.co/api/v2/pokemon?limit=151") // gives us array of all pokemon with name and url //
-    .then((response) => response.json()) // takes data and converts it to json text //
+async function fetchPokemonData() {
+  return fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+    .then((response) => {
+      return response.json();
+    })
     .then(function (allPokemon) {
-      // loops through original data and gives us data for each point in array(pokemon) //
-      allPokemon.results.forEach(function (pokemon) {
-        fetchPokeData(pokemon);
-      });
+      return allPokemon;
     });
 }
 
-// second fetch request is to get the specific data for each pokemon //
-function fetchPokeData(pokemon) {
+async function fetchPokeData(pokemon) {
   let url = pokemon.url;
-
-  fetch(url)
+  return fetch(url)
     .then((response) => response.json())
-    .then(function (pokeData) {
-      createHtml(pokeData);
+    .then(function (pokedata) {
+      return pokedata;
     });
 }
-fetchPokemonData();
+
+async function getPokemonDetails(data) {
+  let arr = [];
+
+  await Promise.all(
+    data.results.map(async (pokemon) => {
+      try {
+        let insertedResponse = await fetchPokeData(pokemon);
+        arr.push(insertedResponse);
+      } catch {
+        console.error("error" + error);
+      }
+    })
+  );
+  console.log("complete all");
+  return arr;
+}
+
+function sortById(listOfPokemon) {
+  return listOfPokemon.sort((a, b) => a.id - b.id);
+}
+
+async function startProgram() {
+  let allPokemon = await fetchPokemonData();
+
+  let listOfDetails = await getPokemonDetails(allPokemon);
+
+  let sortedPokemon = sortById(listOfDetails);
+  console.log(`Sorted Pokemon`);
+
+  createHtml(sortedPokemon);
+}
+startProgram();
 
 function createHtml(pokedata) {
-  pokemonListItem(pokedata);
+  // pokemonListItem(pokedata);
+  for (const data of pokedata) {
+    pokemonListItem(data);
+  }
 }
 
 function backgroundImage(pokeData) {
@@ -46,7 +78,6 @@ function backgroundImage(pokeData) {
   return background;
 }
 
-// CREATING POKEMON ITEMS ON LEFT SIDE TO CLICK ON //
 function pokemonListItem(pokeData) {
   let specificPokemon = document.createElement("div");
   specificPokemon.classList.add("choose-pokemon");
@@ -55,7 +86,6 @@ function pokemonListItem(pokeData) {
   specificPokemon.style.backgroundPosition = "center";
   specificPokemon.style.backgroundRepeat = "no-repeat";
   specificPokemon.style.backgroundSize = "cover";
-  specificPokemon.setAttribute("loading", "lazy");
   specificPokemon.onclick = () => displayAllInfo(pokeData);
   allPokemon.appendChild(specificPokemon);
   return specificPokemon;
@@ -68,7 +98,6 @@ function displayAllInfo(pokeData) {
   statsLi(pokeData);
 }
 
-// displays pokemon name //
 function displayPokemonName(pokeData) {
   pokeName.textContent = `${pokeData.name}`;
 }
