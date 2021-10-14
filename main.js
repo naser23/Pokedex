@@ -10,9 +10,6 @@ const actualStats = document.querySelector(".actual-stats");
 let pokemanPicture =
   "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png";
 
-// --- fetching data from the api --- //
-
-// first fetch request is to get the data for the 151 pokemon //
 async function fetchPokemonData() {
   return fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
     .then((response) => {
@@ -25,28 +22,29 @@ async function fetchPokemonData() {
 
 async function fetchPokeData(pokemon) {
   let url = pokemon.url;
+
   return fetch(url)
     .then((response) => response.json())
-    .then(function (pokedata) {
-      return pokedata;
+    .then(function (pokemon) {
+      return pokemon;
     });
 }
 
-async function getPokemonDetails(data) {
-  let arr = [];
+async function fillArray(data) {
+  let pokemonArray = [];
 
   await Promise.all(
     data.results.map(async (pokemon) => {
       try {
         let insertedResponse = await fetchPokeData(pokemon);
-        arr.push(insertedResponse);
+        pokemonArray.push(insertedResponse);
       } catch {
         console.error("error" + error);
       }
     })
   );
   console.log("complete all");
-  return arr;
+  return pokemonArray;
 }
 
 function sortById(listOfPokemon) {
@@ -56,18 +54,16 @@ function sortById(listOfPokemon) {
 async function startProgram() {
   let allPokemon = await fetchPokemonData();
 
-  let listOfDetails = await getPokemonDetails(allPokemon);
+  let listOfDetails = await fillArray(allPokemon);
 
-  let sortedPokemon = sortById(listOfDetails);
-  console.log(`Sorted Pokemon`);
+  let sortedDetails = sortById(listOfDetails);
 
-  createHtml(sortedPokemon);
+  createHtml(sortedDetails);
 }
 startProgram();
 
-function createHtml(pokedata) {
-  // pokemonListItem(pokedata);
-  for (const data of pokedata) {
+function createHtml(sortedDetails) {
+  for (const data of sortedDetails) {
     pokemonListItem(data);
   }
 }
@@ -81,7 +77,6 @@ function backgroundImage(pokeData) {
 function pokemonListItem(pokeData) {
   let specificPokemon = document.createElement("div");
   specificPokemon.classList.add("choose-pokemon");
-
   specificPokemon.style.backgroundImage = `url(${backgroundImage(pokeData)})`;
   specificPokemon.style.backgroundPosition = "center";
   specificPokemon.style.backgroundRepeat = "no-repeat";

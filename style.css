@@ -177,6 +177,10 @@ body {
     max-height: 300px;
   }
 
+  .choose-pokemon {
+    height: 35%;
+  }
+
   .pokemon-info {
     height: 90%;
     width: 100%;
