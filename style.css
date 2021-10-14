@@ -47,6 +47,7 @@ body {
 
 .choose-pokemon {
   border: 1px solid black;
+  background-color: lightgray;
   width: 40%;
   height: 30%;
   margin: 2rem 5%;
